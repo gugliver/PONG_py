@@ -8,13 +8,13 @@ display_width = 1000
 display_height = 800
 
 pad_width = 16
-pad_height = 100
+pad_height = 140
 
 border_h = 80
 
-ball_pace = 15
-pad_pace = 20
-fps = 60
+ball_pace = 10
+pad_pace = 10
+fps = 40
 
 pos_ball = [display_width//2, display_height//2] #x, y
 ball_rad = 10
@@ -32,6 +32,7 @@ wall_pos_v = 0
 wall_pos_h = display_width - border_h - pad_width
 
 gameDisplay = pygame.display.set_mode((display_width, display_height))
+#, pygame.FULLSCREEN
 pygame.display.set_caption('PONG')
 
 black = (0,0,0)
@@ -47,7 +48,7 @@ pad.fill(white)
 wall = pygame.Surface((pad_width, display_height)).convert_alpha()
 wall.fill(white)
 
-pad_alt = pygame.draw.rect(gameDisplay, white, (0, 0, 20, 60))
+#pad_alt = pygame.draw.rect(gameDisplay, white, (0, 0, 20, 60))
 
 #blit the pads over the background
 def pad_1(x,y):
@@ -59,7 +60,10 @@ def pad_2(x,y):
 def wally(x,y):
 	gameDisplay.blit(wall, (x,y))
 
-dir_ball = [random.randrange(-15,-10), random.randrange(20,30)]
+dir_ball = [random.randrange(-5,5), random.randrange(-5,5)]
+if dir_ball[0] == 0:
+	dir_ball[0] = 2
+
 pygame.display.update()
 pExit = False
 while not pExit:
@@ -130,8 +134,8 @@ while not pExit:
 	wally(wall_pos_h, wall_pos_v)
 	
 	pygame.draw.circle(gameDisplay, white, pos_ball, ball_rad)
-	pygame.display.update(pad_1(pad_1_pos_h,pad_1_pos_v))
-	#pygame.display.update()
+	#pygame.display.update(pad_1(pad_1_pos_h,pad_1_pos_v))
+	pygame.display.update()
 	clock.tick(fps)
 
 pygame.quit()
